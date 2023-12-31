@@ -1,4 +1,4 @@
-package com.mgt.ojcodesandbox;
+package com.mgt.ojcodesandbox.core;
 
 
 import com.mgt.ojcodesandbox.model.ExecuteCodeRequest;
