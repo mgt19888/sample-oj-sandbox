@@ -29,7 +29,7 @@ public class PythonNativeCodeSandbox extends NativeCodeSandboxTemplate {
         return CodeSandboxCmd
                 .builder()
                 .compileCmd(null)
-                .runCmd(String.format("python3 %s/Main.py", userCodeParentPath))
+                .runCmd(String.format("PYTHONIOENCODING=utf-8 python3 %s/Main.py", userCodeParentPath))
                 .build();
     }
 }

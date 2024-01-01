@@ -16,9 +16,9 @@ public class PythonDockerCodeSandbox extends DockerCodeSandboxTemplate {
 
     private static final Boolean FIRST_INIT = true;
 
-    private static final String GLOBAL_JAVA_CLASS_NAME = "Main.java";
+    private static final String GLOBAL_JAVA_CLASS_NAME = "Main.py";
 
-    private static final String IMAGE = "openjdk:8-alpine";
+    private static final String IMAGE = "python:3.8";
 
     public PythonDockerCodeSandbox() {
         super.globalCodeFileName = GLOBAL_JAVA_CLASS_NAME;
@@ -32,11 +32,11 @@ public class PythonDockerCodeSandbox extends DockerCodeSandboxTemplate {
         PythonDockerCodeSandbox javaNativeCodeSandbox = new PythonDockerCodeSandbox();
         ExecuteCodeRequest executeCodeRequest = new ExecuteCodeRequest();
         executeCodeRequest.setInputList(Arrays.asList("1 2", "1 3"));
-        String code = ResourceUtil.readStr("testCode/simpleComputeArgs/Main.java", StandardCharsets.UTF_8);
+        String code = ResourceUtil.readStr("testCode/simpleComputeArgs/Main.py", StandardCharsets.UTF_8);
 //        String code = ResourceUtil.readStr("testCode/unsafeCode/RunFileError.java", StandardCharsets.UTF_8);
 //        String code = ResourceUtil.readStr("testCode/simpleCompute/Main.java", StandardCharsets.UTF_8);
         executeCodeRequest.setCode(code);
-        executeCodeRequest.setLanguage("java");
+        executeCodeRequest.setLanguage("python");
         ExecuteCodeResponse executeCodeResponse = javaNativeCodeSandbox.executeCode(executeCodeRequest);
         System.out.println(executeCodeResponse);
     }
@@ -46,8 +46,8 @@ public class PythonDockerCodeSandbox extends DockerCodeSandboxTemplate {
     public CodeSandboxCmd getCmd(String userCodeParentPath, String userCodePath) {
         return CodeSandboxCmd
                 .builder()
-                .compileCmd(String.format("javac -encoding utf-8 %s", userCodePath))
-                .runCmd("java -Xmx256m -Dfile.encoding=UTF-8 -cp /app Main")
+                .compileCmd(null)
+                .runCmd(String.format("python3 /app/Main.py", userCodeParentPath))
 //                .runCmd("java -cp /app Main")
                 .build();
     }

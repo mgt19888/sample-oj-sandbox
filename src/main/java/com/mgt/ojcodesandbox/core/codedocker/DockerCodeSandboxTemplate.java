@@ -22,7 +22,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
 
 /**
  * 代码沙箱模板方法的实现
@@ -188,6 +190,8 @@ public abstract class DockerCodeSandboxTemplate implements CodeSandbox {
             String[] inputArgsArray = inputArgs.split(" ");
             String[] commandArray = runCmd.split("\\s+");
             String[] cmdArray = ArrayUtil.append(commandArray, inputArgsArray);
+            System.out.println("命令：");
+            System.out.println(Arrays.toString(cmdArray));
             ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(containerId)
                     .withCmd(cmdArray)
                     .withAttachStderr(true)
@@ -262,7 +266,7 @@ public abstract class DockerCodeSandboxTemplate implements CodeSandbox {
                 stopWatch.start();
                 dockerClient.execStartCmd(execId)
                         .exec(execStartResultCallback)
-                        .awaitCompletion(timeOut, TimeUnit.MICROSECONDS);
+                        .awaitCompletion(timeOut, TimeUnit.MILLISECONDS);
                 stopWatch.stop();
                 time = stopWatch.getLastTaskTimeMillis();
                 statsCmd.close();
