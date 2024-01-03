@@ -1,18 +1,18 @@
 package com.mgt.ojcodesandbox.core;
 
-import com.mgt.ojcodesandbox.core.codenative.*;
+import com.mgt.ojcodesandbox.core.codedocker.*;
 
 public class CodeSandboxFactory {
-    public static NativeCodeSandboxTemplate getInstance(String language) {
+    public static DockerCodeSandboxTemplate getInstance(String language) {
         switch (language) {
             case "java":
-                return new JavaNativeCodeSandbox();
+                return new JavaDockerCodeSandbox();
             case "python":
-                return new PythonNativeCodeSandbox();
+                return new PythonDockerCodeSandbox();
             case "c":
-                return new CNativeCodeSandbox();
+                return new CDockerCodeSandbox();
             case "cpp":
-                return new CPPNativeCodeSandbox();
+                return new CPPDockerCodeSandbox();
             default:
                 throw new RuntimeException("暂不支持");
         }

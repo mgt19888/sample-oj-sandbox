@@ -27,9 +27,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class JavaDockerCodeSandbox extends DockerCodeSandboxTemplate {
 
-    private static final long TIME_OUT = 5000L;
+    private static final long TIME_OUT = 15000L;
 
-    private static final Boolean FIRST_INIT = true;
+    // 如果是第一次运行则设置为true，后面再运行则设置为false即可，这样不用每次初始化都去下载镜像
+    private static final Boolean FIRST_INIT = false;
 
     private static final String GLOBAL_JAVA_CLASS_NAME = "Main.java";
 

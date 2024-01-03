@@ -1,7 +1,7 @@
 package com.mgt.ojcodesandbox.controller;
 
 import com.mgt.ojcodesandbox.core.CodeSandboxFactory;
-import com.mgt.ojcodesandbox.core.codenative.NativeCodeSandboxTemplate;
+import com.mgt.ojcodesandbox.core.codedocker.DockerCodeSandboxTemplate;
 import com.mgt.ojcodesandbox.model.ExecuteCodeRequest;
 import com.mgt.ojcodesandbox.model.ExecuteCodeResponse;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +37,7 @@ public class CodeSandboxController {
         if (executeCodeRequest == null) {
             throw new RuntimeException("请求参数为空");
         }
-        NativeCodeSandboxTemplate sandboxTemplate = CodeSandboxFactory.getInstance(executeCodeRequest.getLanguage());
+        DockerCodeSandboxTemplate sandboxTemplate = CodeSandboxFactory.getInstance(executeCodeRequest.getLanguage());
 
         return sandboxTemplate.executeCode(executeCodeRequest);
     }
